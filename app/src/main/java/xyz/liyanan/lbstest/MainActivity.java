@@ -61,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
     //调用LocationClientOption的setScanSpan函数实现每2s更新一次当前位置
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
+        //只允许使用GPS，默认为Hight_Accuracy(室外可变为)，SaveBattery则是只能用网络定位
+        //option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
         option.setScanSpan(2000);
+        //表示需要获取当前的地址信息
+        option.setIsNeedAddress(true);
         mlocationClient.setLocOption(option);
     }
     //当活动被销毁时一定要用到LocationClient的stop（）方法不然会在后台消耗大量的电量
@@ -104,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
             currentPosiontion.append("纬度").append(location.getLatitude()).append("\n");
             //获取经度
             currentPosiontion.append("经度").append(location.getLongitude()).append("\n");
+            //获取国家
+            currentPosiontion.append("国家").append(location.getCountry()).append("\n");
+            //获取省
+            currentPosiontion.append("省").append(location.getProvince()).append("\n");
+            //获取市
+            currentPosiontion.append("市").append(location.getCity()).append("\n");
+            //获取区
+            currentPosiontion.append("区").append(location.getDistrict()).append("\n");
+            //获取街道
+            currentPosiontion.append("街道").append(location.getStreet()).append("\n");
             currentPosiontion.append("定位方式");
             //获取定位方式
             if(location.getLocType()==BDLocation.TypeGpsLocation){
