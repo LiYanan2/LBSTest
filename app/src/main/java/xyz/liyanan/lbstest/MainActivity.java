@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //
     private void requestLocation() {
-        //start（）就可以定位了，定位的结果会回调到前面注册的监听器中
+        initLocation();
         mlocationClient.start();
+    }
+    //调用LocationClientOption的setScanSpan函数实现每2s更新一次当前位置
+    private void initLocation(){
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(2000);
+        mlocationClient.setLocOption(option);
+    }
+    //当活动被销毁时一定要用到LocationClient的stop（）方法不然会在后台消耗大量的电量
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mlocationClient.stop();
     }
 
     @Override
