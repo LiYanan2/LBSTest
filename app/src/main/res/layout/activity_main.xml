@@ -5,10 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    <!--不需要这个textview则让其隐藏-->
     <TextView
         android:id="@+id/positon_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+    <!--MapView是百度提供的自定义控件-->
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"></com.baidu.mapapi.map.MapView>
 
 </android.support.constraint.ConstraintLayout>
